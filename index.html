@@ -9,10 +9,11 @@
     html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
       height: 100%;
       font-family: 'Montserrat', sans-serif;
       background: #000;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     canvas {
       position: fixed;
@@ -28,13 +29,8 @@
       text-align: center;
       color: #f5f5f5;
       padding: 80px 20px;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     h1 {
       font-size: 3em;
@@ -48,7 +44,7 @@
       margin-bottom: 50px;
       min-height: 30px;
     }
-    .links a {
+    .links a, .pix-button {
       display: inline-block;
       margin: 10px;
       padding: 14px 24px;
@@ -60,49 +56,39 @@
       transition: all 0.3s ease-in-out;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
-    .links a:hover {
+    .links a:hover, .pix-button:hover {
       background-color: #ffffff;
       color: #000;
       border-color: #ffffff;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+    .pix-button {
+      font-weight: bold;
+      background-color: #10c47f;
+      border-color: #10c47f;
+      color: #000;
+    }
+    .pix-button:hover {
+      background-color: #0ea86b;
+      color: #fff;
     }
     .cta {
       margin-top: 60px;
       font-size: 1.2em;
       color: #aaaaaa;
     }
-    .bg-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://images.unsplash.com/photo-1520523839893-6c6341d168b2?auto=format&fit=crop&w=1950&q=80');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.05;
-      z-index: 1;
-    }
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      color: white;
-      font-size: 1.5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+      .rotating-text {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
 <body>
-<div id="loader">Sincronizando visão...</div>
 <canvas id="bg"></canvas>
-<div class="bg-image"></div>
 <div class="container">
   <h1>Isaque Tomberlin da Costa</h1>
   <p class="rotating-text" id="rotatingText"></p>
@@ -111,15 +97,13 @@
     <a href="https://wa.me/5541991988040" target="_blank">WhatsApp</a>
     <a href="https://instagram.com/isaque.tomberlin" target="_blank">eBook: Investidor Sem Tempo</a>
     <a href="mailto:isaquetomcosta207@gmail.com">Email</a>
+    <a class="pix-button" href="#" onclick="alert('Chave PIX: isaquetomcosta207@gmail.com')">💸 Apoiar via PIX</a>
   </div>
   <div class="cta">
     <p>Quer falar comigo? Me chama no WhatsApp ou no Instagram.<br>Tô sempre em construção.</p>
   </div>
 </div>
 <script>
-  setTimeout(() => {
-    document.getElementById('loader').style.display = 'none';
-  }, 2000);
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;
@@ -174,15 +158,6 @@
     setTimeout(rotateText, 3000);
   }
   rotateText();
-  let codeBuffer = "";
-  window.addEventListener("keydown", function(e) {
-    codeBuffer += e.key;
-    if (codeBuffer.includes("777")) {
-      alert("Você desbloqueou o modo oculto. Em breve, algo grande será revelado.");
-      codeBuffer = "";
-    }
-    if (codeBuffer.length > 10) codeBuffer = codeBuffer.slice(-10);
-  });
 </script>
 </body>
 </html>

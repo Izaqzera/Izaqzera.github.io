@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Isaque Tomberlin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #000;
-      overflow-x: hidden;
+      color: #fff;
     }
     canvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       z-index: 0;
@@ -26,90 +21,87 @@
     .container {
       position: relative;
       z-index: 2;
+      padding: 60px 20px;
       text-align: center;
-      color: #f5f5f5;
-      padding: 80px 20px;
       max-width: 800px;
       margin: auto;
     }
     h1 {
       font-size: 3em;
-      font-weight: bold;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     .rotating-text {
-      font-size: 1.4em;
-      color: #bbbbbb;
-      margin-bottom: 50px;
-      min-height: 30px;
+      font-size: 1.2em;
+      color: #ccc;
+      height: 30px;
+      margin-bottom: 40px;
     }
-    .links a, .pix-button {
+    .links a {
       display: inline-block;
       margin: 10px;
-      padding: 14px 24px;
-      background-color: #1f1f1f;
-      color: #ffffff;
-      text-decoration: none;
-      border: 2px solid #444;
+      padding: 12px 24px;
+      background: #111;
+      color: #fff;
       border-radius: 6px;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      border: 1px solid #444;
+      transition: 0.3s;
     }
-    .links a:hover, .pix-button:hover {
-      background-color: #ffffff;
+    .links a:hover {
+      background: #fff;
       color: #000;
-      border-color: #ffffff;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     }
     .pix-button {
-      font-weight: bold;
-      background-color: #10c47f;
-      border-color: #10c47f;
-      color: #000;
-    }
-    .pix-button:hover {
-      background-color: #0ea86b;
-      color: #fff;
-    }
-    .cta {
-      margin-top: 60px;
-      font-size: 1.2em;
-      color: #aaaaaa;
-    }
-    #qrCode {
-      display: none;
       margin-top: 20px;
-    }
-    #qrCode img {
-      width: 200px;
-    }
-    form {
-      margin-top: 40px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
+      display: inline-block;
+      padding: 12px 24px;
+      background: #00b894;
       border: none;
-      outline: none;
-    }
-    button[type="submit"] {
-      background: #444;
-      color: #fff;
-      padding: 12px 20px;
-      border: none;
+      color: white;
+      font-size: 1em;
       border-radius: 6px;
       cursor: pointer;
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2em;
-      }
-      .rotating-text {
-        font-size: 1.1em;
-      }
+    #qr-container {
+      margin-top: 20px;
+      display: none;
+    }
+    form {
+      background: #111;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.05);
+      max-width: 600px;
+      margin: 60px auto;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 20px;
+      background: #222;
+      color: white;
+    }
+    button[type=submit] {
+      background: #00b894;
+      border: none;
+      padding: 15px;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #000;
+      z-index: 999;
     }
   </style>
 </head>
@@ -117,61 +109,54 @@
 <canvas id="bg"></canvas>
 <div class="container">
   <h1>Isaque Tomberlin da Costa</h1>
-  <p class="rotating-text" id="rotatingText"></p>
+  <div class="rotating-text" id="rotatingText"></div>
+
   <div class="links">
     <a href="https://instagram.com/isaque.tomberlin" target="_blank">Instagram</a>
     <a href="https://wa.me/5541991988040" target="_blank">WhatsApp</a>
     <a href="https://instagram.com/isaque.tomberlin" target="_blank">eBook: Investidor Sem Tempo</a>
     <a href="mailto:isaquetomcosta207@gmail.com">Email</a>
-    <a class="pix-button" href="#" onclick="copiarPix()">💸 Apoiar via PIX</a>
   </div>
-  <div id="qrCode">
-    <p>Escaneie o QR Code abaixo para pagar via PIX:</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=140.834.049-65" alt="QR Code PIX">
-  </div>
-  <form>
-    <input type="text" placeholder="Seu nome" required>
-    <input type="email" placeholder="Seu email" required>
-    <textarea placeholder="Sua mensagem" rows="4" required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-  <div class="cta">
-    <p>Quer falar comigo? Me chama no WhatsApp ou no Instagram.<br>Tô sempre em construção.</p>
+
+  <button class="pix-button" onclick="mostrarQR()">💸 Apoiar via PIX</button>
+  <div id="qr-container">
+    <p style="margin-top:20px;">Chave: 140.834.049-65</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=140.834.049-65&size=200x200" alt="QR Code PIX">
   </div>
 </div>
-<a href="https://wa.me/5541991988040" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;padding:15px;border-radius:50%;box-shadow:0 0 10px #000;z-index:999;"><img src="https://img.icons8.com/ios-filled/30/ffffff/whatsapp.png"/></a>
-<script>
-  function copiarPix() {
-    const chave = '140.834.049-65';
-    navigator.clipboard.writeText(chave).then(() => {
-      alert('Chave PIX copiada com sucesso!\nAgora abra seu app bancário e cole para transferir.');
-      document.getElementById("qrCode").style.display = "block";
-    }).catch(() => {
-      alert('Erro ao copiar a chave PIX. Copie manualmente: ' + chave);
-    });
-  }
 
+<form action="https://formsubmit.co/isaquetomcosta207@gmail.com" method="POST">
+  <h2 style="text-align:center; font-size: 24px;">📬 Fale comigo diretamente</h2>
+  <input type="text" name="nome" placeholder="Seu nome" required>
+  <input type="email" name="email" placeholder="Seu email" required>
+  <textarea name="mensagem" placeholder="Escreva sua mensagem..." rows="5" required></textarea>
+  <button type="submit">Enviar Mensagem</button>
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://isaquetomberlin.github.io/#obrigado">
+</form>
+
+<a href="https://wa.me/5541991988040" target="_blank" class="whatsapp-float">
+  <img src="https://img.icons8.com/ios-filled/30/ffffff/whatsapp.png"/>
+</a>
+
+<script>
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;
   let height = canvas.height = window.innerHeight;
   let stars = [];
-  function createStars() {
-    stars = [];
-    for (let i = 0; i < 200; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 1.2,
-        speed: Math.random() * 0.5 + 0.05
-      });
-    }
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.2,
+      speed: Math.random() * 0.5 + 0.05
+    });
   }
-  function drawStars() {
+  function animateStars() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = 'white';
-    for (let i = 0; i < stars.length; i++) {
-      const s = stars[i];
+    for (const s of stars) {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
       ctx.fill();
@@ -181,30 +166,31 @@
         s.x = Math.random() * width;
       }
     }
-    requestAnimationFrame(drawStars);
+    requestAnimationFrame(animateStars);
   }
-  createStars();
-  drawStars();
+  animateStars();
   window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-    createStars();
   });
-  const texts = [
+
+  const textos = [
     "Visão afiada.",
     "Mente ativa.",
     "Sem pressa, com propósito.",
-    "Silencioso, mas letal.",
-    "Construindo algo que não se explica."
+    "Silencioso, mas letal."
   ];
   let index = 0;
-  const textElement = document.getElementById("rotatingText");
-  function rotateText() {
-    textElement.textContent = texts[index];
-    index = (index + 1) % texts.length;
-    setTimeout(rotateText, 3000);
+  function mudarTexto() {
+    document.getElementById("rotatingText").textContent = textos[index];
+    index = (index + 1) % textos.length;
+    setTimeout(mudarTexto, 3000);
   }
-  rotateText();
+  mudarTexto();
+
+  function mostrarQR() {
+    document.getElementById('qr-container').style.display = 'block';
+  }
 </script>
 </body>
 </html>

@@ -97,13 +97,22 @@
     <a href="https://wa.me/5541991988040" target="_blank">WhatsApp</a>
     <a href="https://instagram.com/isaque.tomberlin" target="_blank">eBook: Investidor Sem Tempo</a>
     <a href="mailto:isaquetomcosta207@gmail.com">Email</a>
-    <a class="pix-button" href="#" onclick="alert('Chave PIX: isaquetomcosta207@gmail.com')">💸 Apoiar via PIX</a>
+    <a class="pix-button" href="#" onclick="copiarPix()">💸 Apoiar via PIX</a>
   </div>
   <div class="cta">
     <p>Quer falar comigo? Me chama no WhatsApp ou no Instagram.<br>Tô sempre em construção.</p>
   </div>
 </div>
 <script>
+  function copiarPix() {
+    const chave = '140.834.049-65';
+    navigator.clipboard.writeText(chave).then(() => {
+      alert('Chave PIX copiada com sucesso!\nAgora abra seu app bancário e cole para transferir.');
+    }).catch(() => {
+      alert('Erro ao copiar a chave PIX. Copie manualmente: ' + chave);
+    });
+  }
+
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
   let width = canvas.width = window.innerWidth;

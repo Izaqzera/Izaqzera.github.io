@@ -77,6 +77,32 @@
       font-size: 1.2em;
       color: #aaaaaa;
     }
+    #qrCode {
+      display: none;
+      margin-top: 20px;
+    }
+    #qrCode img {
+      width: 200px;
+    }
+    form {
+      margin-top: 40px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    button[type="submit"] {
+      background: #444;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
     @media (max-width: 600px) {
       h1 {
         font-size: 2em;
@@ -99,15 +125,27 @@
     <a href="mailto:isaquetomcosta207@gmail.com">Email</a>
     <a class="pix-button" href="#" onclick="copiarPix()">💸 Apoiar via PIX</a>
   </div>
+  <div id="qrCode">
+    <p>Escaneie o QR Code abaixo para pagar via PIX:</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=140.834.049-65" alt="QR Code PIX">
+  </div>
+  <form>
+    <input type="text" placeholder="Seu nome" required>
+    <input type="email" placeholder="Seu email" required>
+    <textarea placeholder="Sua mensagem" rows="4" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
   <div class="cta">
     <p>Quer falar comigo? Me chama no WhatsApp ou no Instagram.<br>Tô sempre em construção.</p>
   </div>
 </div>
+<a href="https://wa.me/5541991988040" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;padding:15px;border-radius:50%;box-shadow:0 0 10px #000;z-index:999;"><img src="https://img.icons8.com/ios-filled/30/ffffff/whatsapp.png"/></a>
 <script>
   function copiarPix() {
     const chave = '140.834.049-65';
     navigator.clipboard.writeText(chave).then(() => {
       alert('Chave PIX copiada com sucesso!\nAgora abra seu app bancário e cole para transferir.');
+      document.getElementById("qrCode").style.display = "block";
     }).catch(() => {
       alert('Erro ao copiar a chave PIX. Copie manualmente: ' + chave);
     });

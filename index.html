@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isaque Tomberlin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      overflow: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #f5f5f5;
+      padding: 80px 20px;
+      max-width: 700px;
+      margin: auto;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-size: 3em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .rotating-text {
+      font-size: 1.4em;
+      color: #bbbbbb;
+      margin-bottom: 50px;
+      min-height: 30px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 24px;
+      background-color: #1f1f1f;
+      color: #ffffff;
+      text-decoration: none;
+      border: 2px solid #444;
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    .links a:hover {
+      background-color: #ffffff;
+      color: #000;
+      border-color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+    .cta {
+      margin-top: 60px;
+      font-size: 1.2em;
+      color: #aaaaaa;
+    }
+    .bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1520523839893-6c6341d168b2?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.05;
+      z-index: 1;
+    }
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      color: white;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+<div id="loader">Sincronizando visão...</div>
+<canvas id="bg"></canvas>
+<div class="bg-image"></div>
+<div class="container">
+  <h1>Isaque Tomberlin da Costa</h1>
+  <p class="rotating-text" id="rotatingText"></p>
+  <div class="links">
+    <a href="https://instagram.com/isaque.tomberlin" target="_blank">Instagram</a>
+    <a href="https://wa.me/5541991988040" target="_blank">WhatsApp</a>
+    <a href="https://instagram.com/isaque.tomberlin" target="_blank">eBook: Investidor Sem Tempo</a>
+    <a href="mailto:isaquetomcosta207@gmail.com">Email</a>
+  </div>
+  <div class="cta">
+    <p>Quer falar comigo? Me chama no WhatsApp ou no Instagram.<br>Tô sempre em construção.</p>
+  </div>
+</div>
+<script>
+  setTimeout(() => {
+    document.getElementById('loader').style.display = 'none';
+  }, 2000);
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  let stars = [];
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.2,
+        speed: Math.random() * 0.5 + 0.05
+      });
+    }
+  }
+  function drawStars() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = 'white';
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
+      ctx.fill();
+      s.y += s.speed;
+      if (s.y > height) {
+        s.y = 0;
+        s.x = Math.random() * width;
+      }
+    }
+    requestAnimationFrame(drawStars);
+  }
+  createStars();
+  drawStars();
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    createStars();
+  });
+  const texts = [
+    "Visão afiada.",
+    "Mente ativa.",
+    "Sem pressa, com propósito.",
+    "Silencioso, mas letal.",
+    "Construindo algo que não se explica."
+  ];
+  let index = 0;
+  const textElement = document.getElementById("rotatingText");
+  function rotateText() {
+    textElement.textContent = texts[index];
+    index = (index + 1) % texts.length;
+    setTimeout(rotateText, 3000);
+  }
+  rotateText();
+  let codeBuffer = "";
+  window.addEventListener("keydown", function(e) {
+    codeBuffer += e.key;
+    if (codeBuffer.includes("777")) {
+      alert("Você desbloqueou o modo oculto. Em breve, algo grande será revelado.");
+      codeBuffer = "";
+    }
+    if (codeBuffer.length > 10) codeBuffer = codeBuffer.slice(-10);
+  });
+</script>
+</body>
+</html>
